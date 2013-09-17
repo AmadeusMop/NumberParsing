@@ -1,12 +1,27 @@
+import java.util.Scanner;
+
 
 public class Main {
 	
 	public static void main(String[] args) {
-		System.out.println(reduceNum(534202));
+		Scanner console = new Scanner(System.in);
+		int num;
+		System.out.print("Enter a number to convert, 0 to quit: ");
+		num = console.nextInt();
+		while(num > 0) {
+			System.out.println(reduceAndParse(num));
+			System.out.print("Enter a number to convert, 0 to quit: ");
+			num = console.nextInt();
+		}
+		console.close();
+		System.out.println("Goodbye!");
 	}
 	
-	public static String reduceNum(int n) {
-		return reduceNum(n, 0);
+	public static String reduceAndParse(int n) {
+		String output = reduceNum(n, 0);
+		output = output.trim();
+		String capOut = output.substring(0, 1).toUpperCase() + output.substring(1) + ".";
+		return capOut;
 	}
 	
 	private static String reduceNum(int n, int power) {
@@ -26,7 +41,7 @@ public class Main {
 			n /= 10;
 			output = parseTens(n%10) + output;
 			n /= 10;
-			output = parseOnes(n) + " hundred" + output;
+			output = parseHundreds(n%10) + output;
 		}
 		output += powersOfThousand(power);
 		return output;
@@ -99,6 +114,11 @@ public class Main {
 		default:
 			return " ===There was an error! n = " + n + "=== ";
 		}	
+	}
+	
+	private static String parseHundreds(int n) {
+		if(n == 0) return "";
+		return parseOnes(n) + " hundred";
 	}
 	
 	private static String parseTeens(int n) {
