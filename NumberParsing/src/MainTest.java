@@ -16,9 +16,10 @@ public class MainTest {
 		assertEquals("five million fifty thousand five hundred fifteen", Main.reduceAndParse(5050515));
 		assertEquals("fifty million", Main.reduceAndParse(50000000));
 		assertEquals("one billion fifteen million fifty five thousand five hundred fifteen", Main.reduceAndParse(1015055515));
+		assertEquals("one billion two hundred thirty four million five hundred sixty seven thousand eight hundred ninety", Main.reduceAndParse(1234567890));
 		assertEquals("one billion five hundred fifteen million five hundred fifty five thousand five hundred five", Main.reduceAndParse(1515555505));
 		assertEquals("two billion", Main.reduceAndParse(2000000000));
-		assertEquals("two billion one hundred fourty seven million four hundred eighty three thousand six hundred fourty seven", Main.reduceAndParse(2147483647)); //MAXIMUM INTEGER!
+		assertEquals("two billion one hundred fourty seven million four hundred eighty three thousand six hundred fourty seven", Main.reduceAndParse(2147483647)); //MAXIMUM INTEGER
 	}
 	
 	@Test
@@ -58,7 +59,7 @@ public class MainTest {
 	public void ThousandsPlaceTest() {
 		String[] thousandsPlaces = {" one", " one thousand", " one million", " one billion"};
 		for(int i = 0; i < 4; i++) {
-			assertEquals(thousandsPlaces[i], Main.reduceNum(1, i));
+			assertEquals(thousandsPlaces[i], Main.reduceAndParse(1, i));
 		}
 	}
 }

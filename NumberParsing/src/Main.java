@@ -23,20 +23,22 @@ public class Main {
 	}
 
 	public static String reduceAndParse(int n) {
-		return reduceNum(n, 0).trim();
+		return reduceAndParse(n, 0).trim();
 	}
 
-	public static String reduceNum(int n, int power) {
+	public static String reduceAndParse(int n, int power) {
 		if (n < 1000) {
 			return parseNum(n, power);
 		} else {
-			return reduceNum(n / 1000, power + 1) + parseNum(n % 1000, power);
+			return reduceAndParse(n / 1000, power + 1) + parseNum(n % 1000, power);
 		}
 	}
 
 	public static String parseNum(int n, int power) {
 		String output = "";
-		if (n % 100 >= 10 && n % 100 < 20) {
+		if(n <= 0) {
+			return output;
+		} else if (n % 100 >= 10 && n % 100 < 20) {
 			output += parseTeens(n);
 			n /= 100;
 		} else {
@@ -46,7 +48,7 @@ public class Main {
 			n /= 10;
 		}
 		output = parseHundreds(n % 10) + output;
-		if(!output.equals("")) output += powersOfThousand(power);
+		output += powersOfThousand(power);
 		return output;
 	}
 
