@@ -20,6 +20,9 @@ public class MainTest {
 		assertEquals("one billion five hundred fifteen million five hundred fifty five thousand five hundred five", Main.reduceAndParse(1515555505));
 		assertEquals("two billion", Main.reduceAndParse(2000000000));
 		assertEquals("two billion one hundred fourty seven million four hundred eighty three thousand six hundred fourty seven", Main.reduceAndParse(2147483647)); //MAXIMUM INTEGER
+		assertEquals("one billion one", Main.reduceAndParse(1000000001));
+		assertEquals("one billion", Main.reduceAndParse(1000000000));
+		assertEquals("nineteen million one", Main.reduceAndParse(19000001));
 	}
 	
 	@Test
