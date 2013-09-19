@@ -63,7 +63,7 @@ public class Main {
 		case 3:
 			return " billion";
 		default:
-			return "Error!";
+			return "===There was an error in powersOfThousand()! power = " + power + "=== ";
 		}
 	}
 
@@ -90,7 +90,7 @@ public class Main {
 		case 0:
 			return "";
 		default:
-			return " ===There was an error! n = " + n + "=== ";
+			return " ===There was an error in parseOnes()! n = " + n + "=== ";
 		}
 	}
 
@@ -117,7 +117,7 @@ public class Main {
 		case 0:
 			return "";
 		default:
-			return " ===There was an error! n = " + n + "=== ";
+			return " ===There was an error in parseTens()! n = " + n + "=== ";
 		}
 	}
 
@@ -150,7 +150,7 @@ public class Main {
 		case 10:
 			return " ten";
 		default:
-			return "Error in parseTeens()!";
+			return " ===There was an error in parseTeens()! n = " + n + "=== ";
 		}
 	}
 }
