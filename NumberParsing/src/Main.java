@@ -1,19 +1,59 @@
 import java.util.Scanner;
 
 public class Main {
+	
+	public static final String[] ones = {"", " one", " two", " three", " four", " five", " six", " seven", " eight", " nine"};
+	public static final String[] teens = {"ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen"};
+	public static final String[] tens = {"", " ten", " twenty", " thirty", " fourty", " fifty", " sixty", " seventy", " eighty", " ninety"};
 
 	public static void main(String[] args) {
 		Scanner console = new Scanner(System.in);
-		int num;
+		double num;
 		System.out.print("Enter a number to convert, 0 to quit: ");
-		num = console.nextInt();
-		while(num > 0) {
+		num = console.nextDouble();
+		while(num > 0.0) {
 			System.out.println(parse(num));
 			System.out.print("Enter a number to convert, 0 to quit: ");
-			num = console.nextInt();
+			num = console.nextDouble();
 		}
 		console.close();
 		System.out.println("Goodbye!");
+	}
+	
+	public static String parse(double d) {
+		int n = (int)d;
+		if(d == n) {
+			return parse(n);
+		} else {
+			String output = reduceAndParse(n) + " and " + parseDecimal(d);
+			String capOut = output.substring(0, 1).toUpperCase() + output.substring(1) + ".";
+			return capOut;
+		}
+	}
+	
+	public static String parseDecimal(double d) {
+		String numAsString = Double.toString(d);
+		int decimalIndex =  numAsString.lastIndexOf(".");
+		int power =  numAsString.length() - decimalIndex - 1;
+		double num = Double.parseDouble(numAsString.substring(decimalIndex));
+		int expandedNum = (int)(num*Math.pow(10, power));
+		String parsedDecimal = reduceAndParse(expandedNum);
+		String output = parsedDecimal + parseDecimalPower(power);
+		if(!parsedDecimal.endsWith("one")) {
+			output += "s";
+		}
+		return output;
+	}
+	
+	public static String parseDecimalPower(int power) {
+		if(power == 1) {
+			return " tenth";
+		} else if(power == 2) {
+			return " hundredth";
+		} else {
+			power /= 3;
+			return powersOfThousand(power) + "th";
+		}
 	}
 
 	public static String parse(int n) {
@@ -68,89 +108,33 @@ public class Main {
 	}
 
 	public static String parseOnes(int n) {
-		switch (n) {
-		case 9:
-			return " nine";
-		case 8:
-			return " eight";
-		case 7:
-			return " seven";
-		case 6:
-			return " six";
-		case 5:
-			return " five";
-		case 4:
-			return " four";
-		case 3:
-			return " three";
-		case 2:
-			return " two";
-		case 1:
-			return " one";
-		case 0:
-			return "";
-		default:
+		if(n < 0 || n > 9) {
 			return " ===There was an error in parseOnes()! n = " + n + "=== ";
 		}
+		return ones[n];
 	}
 
 	public static String parseTens(int n) {
-		switch (n) {
-		case 9:
-			return " ninety";
-		case 8:
-			return " eighty";
-		case 7:
-			return " seventy";
-		case 6:
-			return " sixty";
-		case 5:
-			return " fifty";
-		case 4:
-			return " fourty";
-		case 3:
-			return " thirty";
-		case 2:
-			return " twenty";
-		case 1:
-			return " ten";
-		case 0:
-			return "";
-		default:
+		if(n < 0 || n > 9) {
 			return " ===There was an error in parseTens()! n = " + n + "=== ";
+		} else {
+			return tens[n];
 		}
 	}
 
 	public static String parseHundreds(int n) {
-		if (n == 0)
+		if (n == 0) {
 			return "";
-		return parseOnes(n) + " hundred";
+		} else {
+			return parseOnes(n) + " hundred";
+		}
 	}
 
 	public static String parseTeens(int n) {
-		switch (n % 100) {
-		case 19:
-			return " nineteen";
-		case 18:
-			return " eighteen";
-		case 17:
-			return " seventeen";
-		case 16:
-			return " sixteen";
-		case 15:
-			return " fifteen";
-		case 14:
-			return " fourteen";
-		case 13:
-			return " thirteen";
-		case 12:
-			return " twelve";
-		case 11:
-			return " eleven";
-		case 10:
-			return " ten";
-		default:
+		if(n < 0 || n > 9) {
 			return " ===There was an error in parseTeens()! n = " + n + "=== ";
+		} else {
+			return teens[n-10];
 		}
 	}
 }
