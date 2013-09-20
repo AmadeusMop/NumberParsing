@@ -46,14 +46,15 @@ public class Main {
 	}
 	
 	public static String parseDecimalPower(int power) {
-		if(power == 1) {
+		return reduceAndParse((int)Math.pow(10, power));
+		/*if(power == 1) {
 			return " tenth";
 		} else if(power == 2) {
 			return " hundredth";
 		} else {
 			power /= 3;
 			return powersOfThousand(power) + "th";
-		}
+		}*/
 	}
 
 	public static String parse(int n) {
@@ -131,7 +132,7 @@ public class Main {
 	}
 
 	public static String parseTeens(int n) {
-		if(n < 0 || n > 9) {
+		if(n < 10 || n > 19) {
 			return " ===There was an error in parseTeens()! n = " + n + "=== ";
 		} else {
 			return teens[n-10];
