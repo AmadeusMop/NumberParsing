@@ -26,6 +26,13 @@ public class MainTest {
 	}
 	
 	@Test
+	public void decimalParseTest() {
+		assertEquals("Five and one tenth.", Main.parse(5.1));
+		assertEquals("Five hundred fifty five and five hundred fifteen thousandths.", Main.parse(555.515));
+		assertEquals("Five thousand and five thousandths.", Main.parse(5000.005));
+	}
+	
+	@Test
 	public void TeensParseTest() {
 		int[] teens = {10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 		String[] stringTeens = {" ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen"};

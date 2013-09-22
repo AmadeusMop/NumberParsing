@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 	
 	public static final String[] ones = {"", " one", " two", " three", " four", " five", " six", " seven", " eight", " nine"};
-	public static final String[] teens = {"ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen"};
+	public static final String[] teens = {" ten", " eleven", " twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen"};
 	public static final String[] tens = {"", " ten", " twenty", " thirty", " fourty", " fifty", " sixty", " seventy", " eighty", " ninety"};
 
 	public static void main(String[] args) {
@@ -46,15 +46,12 @@ public class Main {
 	}
 	
 	public static String parseDecimalPower(int power) {
-		return reduceAndParse((int)Math.pow(10, power));
-		/*if(power == 1) {
-			return " tenth";
-		} else if(power == 2) {
-			return " hundredth";
-		} else {
-			power /= 3;
-			return powersOfThousand(power) + "th";
-		}*/
+		String output = reduceAndParse((int)Math.pow(10, power));
+		if(output.startsWith("one")) {
+			output = output.substring(4);
+		}
+		output = " " + output + "th";
+		return output;
 	}
 
 	public static String parse(int n) {
@@ -80,7 +77,7 @@ public class Main {
 		if(n <= 0) {
 			return output;
 		} else if (n % 100 >= 10 && n % 100 < 20) {
-			output += parseTeens(n);
+			output += parseTeens(n % 100);
 			n /= 100;
 		} else {
 			output = parseOnes(n % 10);
